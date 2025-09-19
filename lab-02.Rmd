@@ -30,14 +30,16 @@ plastic_waste <- plastic_waste %>%
 ```{r plastic-waste-continent}
 ggplot(plastic_waste, aes(x=plastic_waste_per_cap,)) +
   geom_histogram(binwidth=0.1) +
-  facet_wrap(~continent)
+  facet_wrap(~continent) + 
+  labs(title="Quantité de déchets par habitants, par continent", x="Quantité de déchets par habitant (kg/jour)", y="Nombre de pays")
 ```
 
 ### Exercise 2
 
 ```{r plastic-waste-density}
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, colour=continent, fill = continent)) + 
-  geom_density(alpha = 0.3)
+  geom_density(alpha = 0.3) + 
+  labs(title="Quantité de déchets par habitant, par continent", x="Quantité de déchets par habitant (kg/jour)", y="Densité de pays")
 ```
 
 Le réglage de la couleur est dans « aes » et le réglage de la transparence est dans « geom_density » car le premier est selon chaque variable (le mapping), alors que la transparence fixe la propriété pour tout le graphique (le setting).
@@ -48,14 +50,16 @@ Boxplot:
 
 ```{r plastic-waste-boxplot}
 ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap)) + 
-  geom_boxplot()
+  geom_boxplot() + 
+  labs(title="Quantité de déchets par habitant selon les continent", x="Continents", y="Quantité de déchets par habitant (kg/jour)")
 ```
 
 Violin plot:
 
 ```{r plastic-waste-violin}
 ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap)) + 
-  geom_violin()
+  geom_violin() + 
+  labs(title="Quantité de déchets par habitant selon les continent", x="Continents", y="Quantité de déchets par habitant (kg/jour)")
 ```
 
 Les violin plots permettent de voir plus précisément la distribution des données, alors que les box plots ne font que montrer les tendances.
@@ -65,7 +69,8 @@ Les violin plots permettent de voir plus précisément la distribution des donn�
 
 ```{r plastic-waste-mismanaged}
 ggplot(plastic_waste,aes(x=plastic_waste_per_cap, y=mismanaged_plastic_waste_per_cap, colour = continent)) + 
-  geom_point()
+  geom_point() + 
+  labs(title="Quantité de déchets non-gérés selon la quantité de déchets, par continent", x="Quantité de déchets par habitant (kg/jour)", y="Quantité de déchets non-géré par habitant (kg/jour)")
 ```
 
 On remarque que l'Europe gère beaucoup mieux ses déchets que les autres continents. Au contraire, l'Asie et l'Océanie sont généralement les pires.
@@ -74,19 +79,30 @@ On remarque que l'Europe gère beaucoup mieux ses déchets que les autres contin
 
 
 ```{r plastic-waste-population-total}
-# insert code here
+ggplot(plastic_waste, aes(y=plastic_waste_per_cap, x=total_pop, colour=continent)) + 
+  geom_point() + 
+  labs(title="Quantité de déchets par habitant selon la population totale, par continent", x="Population totale", y="Quantité de déchets par habitant (kg/jour)")
 ```
 
 ```{r plastic-waste-population-coastal}
-# insert code here
+ggplot(plastic_waste, aes(x=coastal_pop, y=plastic_waste_per_cap, colour=continent)) + 
+  geom_point() + 
+  labs(title="Quantité de déchets par habitant selon la population côtière, par continent", x="Population côtière", y="Quantité de déchets par habitant (kg/jour)")
 ```
 
-Réponse à la question...
+Il ne me semble pas avoir de relation plus forte pour l'une des paires de variables.La seule conclusion que je peut en tirer est par rapport à la quantité de population côtière par continent.
 
 ## Conclusion
 
 Recréez la visualisation:
 
 ```{r recreate-viz}
-# insert code here
+plastic_waste_coastal <- plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>%
+  filter(plastic_waste_per_cap < 3)
+
+
+ggplot(plastic_waste, aes(x=coastal_pop_prop, y=plastic_waste_per_cap, colour=continent)) + 
+  geom_point() + 
+  geom_smooth()
 ```
