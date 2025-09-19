@@ -52,24 +52,36 @@ tout le graphique (le setting).
 Boxplot:
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap)) + 
+  geom_boxplot()
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
 
 Violin plot:
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap)) + 
+  geom_violin()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
+
+Les violin plots permettent de voir plus précisément la distribution des
+données, alors que les box plots ne font que montrer les tendances.
 
 ### Exercise 4
 
 ``` r
-# insert code here
+ggplot(plastic_waste,aes(x=plastic_waste_per_cap, y=mismanaged_plastic_waste_per_cap, colour = continent)) + 
+  geom_point()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
+
+On remarque que l’Europe gère beaucoup mieux ses déchets que les autres
+continents. Au contraire, l’Asie et l’Océanie sont généralement les
+pires.
 
 ### Exercise 5
 

@@ -47,25 +47,28 @@ Le réglage de la couleur est dans « aes » et le réglage de la transparence e
 Boxplot:
 
 ```{r plastic-waste-boxplot}
-# insert code here
+ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap)) + 
+  geom_boxplot()
 ```
 
 Violin plot:
 
 ```{r plastic-waste-violin}
-# insert code here
+ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap)) + 
+  geom_violin()
 ```
 
-Réponse à la question...
+Les violin plots permettent de voir plus précisément la distribution des données, alors que les box plots ne font que montrer les tendances.
 
 ### Exercise 4
 
 
 ```{r plastic-waste-mismanaged}
-# insert code here
+ggplot(plastic_waste,aes(x=plastic_waste_per_cap, y=mismanaged_plastic_waste_per_cap, colour = continent)) + 
+  geom_point()
 ```
 
-Réponse à la question...
+On remarque que l'Europe gère beaucoup mieux ses déchets que les autres continents. Au contraire, l'Asie et l'Océanie sont généralement les pires.
 
 ### Exercise 5
 
